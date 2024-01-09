@@ -8,6 +8,10 @@ public class RequestRating {
     private String review ;
     private String comment;
     private String commentBy;
+    private Float instructorQuality;
+    private Float contentRelevance;
+    private Float courseEngagement;
+    private Float assessmentsQuality;
 
     public String getActivityId() {
         return activityId;
@@ -63,5 +67,37 @@ public class RequestRating {
 
     public void setCommentBy(String commentBy) {
         this.commentBy = commentBy;
+    }
+
+    public Float getInstructorQuality() {
+        return instructorQuality;
+    }
+
+    public void setInstructorQuality(Float instructorQuality) {
+        this.instructorQuality = instructorQuality;
+    }
+
+    public Float getContentRelevance() {
+        return contentRelevance;
+    }
+
+    public void setContentRelevance(Float contentRelevance) {
+        this.contentRelevance = contentRelevance;
+    }
+
+    public Float getCourseEngagement() {
+        return courseEngagement;
+    }
+
+    public void setCourseEngagement(Float courseEngagement) {
+        this.courseEngagement = courseEngagement;
+    }
+
+    public Float getAssessmentsQuality() {
+        return assessmentsQuality;
+    }
+
+    public void setAssessmentsQuality(Float assessmentsQuality) {
+        this.assessmentsQuality = assessmentsQuality;
     }
 }

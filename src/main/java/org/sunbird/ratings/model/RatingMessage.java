@@ -79,6 +79,10 @@ public class RatingMessage {
         public String updatedOn;
         public Float rating;
         public String review;
+        private Float instructorQuality;
+        private Float contentRelevance;
+        private Float courseEngagement;
+        private Float assessmentsQuality;
 
         public String getUpdatedOn() {
             return updatedOn;
@@ -104,6 +108,37 @@ public class RatingMessage {
             this.review = review;
         }
 
+        public Float getInstructorQuality() {
+            return instructorQuality;
+        }
+
+        public void setInstructorQuality(Float instructorQuality) {
+            this.instructorQuality = instructorQuality;
+        }
+
+        public Float getContentRelevance() {
+            return contentRelevance;
+        }
+
+        public void setContentRelevance(Float contentRelevance) {
+            this.contentRelevance = contentRelevance;
+        }
+
+        public Float getCourseEngagement() {
+            return courseEngagement;
+        }
+
+        public void setCourseEngagement(Float courseEngagement) {
+            this.courseEngagement = courseEngagement;
+        }
+
+        public Float getAssessmentsQuality() {
+            return assessmentsQuality;
+        }
+
+        public void setAssessmentsQuality(Float assessmentsQuality) {
+            this.assessmentsQuality = assessmentsQuality;
+        }
     }
 
 }
