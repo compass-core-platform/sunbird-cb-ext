@@ -9,10 +9,10 @@ public class LookupDataModel {
     private String updatedOn;
     private String activityType;
     private String userId;
-    private Float instructorQuality;
-    private Float contentRelevance;
-    private Float courseEngagement;
-    private Float assessmentsQuality;
+    private Float instructorquality;
+    private Float contentrelevance;
+    private Float courseengagement;
+    private Float assessmentsquality;
 
     public LookupDataModel() {
 
@@ -25,10 +25,10 @@ public class LookupDataModel {
         this.updatedOn = updatedOn.toString();
         this.activityType = activityType;
         this.userId = userId;
-        this.assessmentsQuality = assementsQuality;
-        this.contentRelevance = contentRelevance;
-        this.courseEngagement = courseEngagement;
-        this.instructorQuality = instructorQuality;
+        this.assessmentsquality = assementsQuality;
+        this.contentrelevance = contentRelevance;
+        this.courseengagement = courseEngagement;
+        this.instructorquality = instructorQuality;
     }
 
     public String getActivityId() {
@@ -80,36 +80,36 @@ public class LookupDataModel {
         this.userId = userId;
     }
 
-    public Float getInstructorQuality() {
-        return instructorQuality;
+    public Float getInstructorquality() {
+        return instructorquality;
     }
 
-    public void setInstructorQuality(Float instructorQuality) {
-        this.instructorQuality = instructorQuality;
+    public void setInstructorquality(Float instructorquality) {
+        this.instructorquality = instructorquality;
     }
 
-    public Float getContentRelevance() {
-        return contentRelevance;
+    public Float getContentrelevance() {
+        return contentrelevance;
     }
 
-    public void setContentRelevance(Float contentRelevance) {
-        this.contentRelevance = contentRelevance;
+    public void setContentrelevance(Float contentrelevance) {
+        this.contentrelevance = contentrelevance;
     }
 
-    public Float getCourseEngagement() {
-        return courseEngagement;
+    public Float getCourseengagement() {
+        return courseengagement;
     }
 
-    public void setCourseEngagement(Float courseEngagement) {
-        this.courseEngagement = courseEngagement;
+    public void setCourseengagement(Float courseengagement) {
+        this.courseengagement = courseengagement;
     }
 
-    public Float getAssessmentsQuality() {
-        return assessmentsQuality;
+    public Float getAssessmentsquality() {
+        return assessmentsquality;
     }
 
-    public void setAssessmentsQuality(Float assessmentsQuality) {
-        this.assessmentsQuality = assessmentsQuality;
+    public void setAssessmentsquality(Float assessmentsquality) {
+        this.assessmentsquality = assessmentsquality;
     }
 
     @Override
@@ -121,10 +121,10 @@ public class LookupDataModel {
                 ", updatedOn='" + updatedOn + '\'' +
                 ", activityType='" + activityType + '\'' +
                 ", userId='" + userId + '\'' +
-                ", assessmentsQuality=" + assessmentsQuality +
-                ", contentRelevance=" + contentRelevance +
-                ", courseEngagement=" + courseEngagement +
-                ", assessmentsQuality=" + assessmentsQuality +
+                ", assessmentsQuality=" + assessmentsquality +
+                ", contentRelevance=" + contentrelevance +
+                ", courseEngagement=" + courseengagement +
+                ", assessmentsQuality=" + assessmentsquality +
                 '}';
     }
 }

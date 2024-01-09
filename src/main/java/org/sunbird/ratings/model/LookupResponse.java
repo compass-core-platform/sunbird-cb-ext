@@ -11,10 +11,10 @@ public class LookupResponse {
     private String activityType;
     private String userId;
     private String firstName;
-    private String instructorQuality;
-    private String contentRelevance;
-    private String courseEngagement;
-    private String assessmentsQuality;
+    private String instructorquality;
+    private String contentrelevance;
+    private String courseengagement;
+    private String assessmentsquality;
 
     public LookupResponse(String activityId, String review, String rating, Long updatedon,String updatedOnUUID, String activityType, String userId, String firstName, String assementsQuality, String contentRelevance, String courseEngagement, String instructorQuality) {
         this.activityId = activityId;
@@ -25,10 +25,10 @@ public class LookupResponse {
         this.activityType = activityType;
         this.userId = userId;
         this.firstName = firstName;
-        this.assessmentsQuality = assementsQuality;
-        this.contentRelevance = contentRelevance;
-        this.courseEngagement = courseEngagement;
-        this.instructorQuality = instructorQuality;
+        this.assessmentsquality = assementsQuality;
+        this.contentrelevance = contentRelevance;
+        this.courseengagement = courseEngagement;
+        this.instructorquality = instructorQuality;
     }
 
     public String getActivityId() {
@@ -95,35 +95,35 @@ public class LookupResponse {
         this.firstName = firstName;
     }
 
-    public String getInstructorQuality() {
-        return instructorQuality;
+    public String getInstructorquality() {
+        return instructorquality;
     }
 
-    public void setInstructorQuality(String instructorQuality) {
-        this.instructorQuality = instructorQuality;
+    public void setInstructorquality(String instructorquality) {
+        this.instructorquality = instructorquality;
     }
 
-    public String getContentRelevance() {
-        return contentRelevance;
+    public String getContentrelevance() {
+        return contentrelevance;
     }
 
-    public void setContentRelevance(String contentRelevance) {
-        this.contentRelevance = contentRelevance;
+    public void setContentrelevance(String contentrelevance) {
+        this.contentrelevance = contentrelevance;
     }
 
-    public String getCourseEngagement() {
-        return courseEngagement;
+    public String getCourseengagement() {
+        return courseengagement;
     }
 
-    public void setCourseEngagement(String courseEngagement) {
-        this.courseEngagement = courseEngagement;
+    public void setCourseengagement(String courseengagement) {
+        this.courseengagement = courseengagement;
     }
 
-    public String getAssessmentsQuality() {
-        return assessmentsQuality;
+    public String getAssessmentsquality() {
+        return assessmentsquality;
     }
 
-    public void setAssessmentsQuality(String assessmentsQuality) {
-        this.assessmentsQuality = assessmentsQuality;
+    public void setAssessmentsquality(String assessmentsquality) {
+        this.assessmentsquality = assessmentsquality;
     }
 }

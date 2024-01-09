@@ -349,10 +349,10 @@ public class RatingServiceImpl implements RatingService {
                             lookupModel.getActivityType(),
                             lookupModel.getUserId(),
                             (userModel.getFirstName() != null) ? userModel.getFirstName() : "",
-                            lookupModel.getAssessmentsQuality().toString(),
-                            lookupModel.getContentRelevance().toString(),
-                            lookupModel.getCourseEngagement().toString(),
-                            lookupModel.getInstructorQuality().toString()
+                            lookupModel.getAssessmentsquality().toString(),
+                            lookupModel.getContentrelevance().toString(),
+                            lookupModel.getCourseengagement().toString(),
+                            lookupModel.getInstructorquality().toString()
                     ));
 
                 }
