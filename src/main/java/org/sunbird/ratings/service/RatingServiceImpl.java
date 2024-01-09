@@ -245,11 +245,11 @@ public class RatingServiceImpl implements RatingService {
                         requestRating.getUserId(), String.valueOf((prevInfo.get(Constants.CREATED_ON))));
 
                 ratingMessage.setPrevValues(processEventMessage(String.valueOf(prevInfo.get(Constants.UPDATED_ON)),
-                        (Float) prevInfo.get(Constants.RATING), (String) prevInfo.get(Constants.REVIEW)));
+                        (Float) prevInfo.get(Constants.RATING), (String) prevInfo.get(Constants.REVIEW), (Float) prevInfo.get(Constants.ASSESSMENTQUALITY), (Float) prevInfo.get(Constants.CONTENTRELEVANCE), (Float) prevInfo.get(Constants.COURSEENGAGEMENT), (Float) prevInfo.get(Constants.INSTRUCTORQUALITY)));
 //                ratingMessage.setUpdatedValues(processEventMessage(String.valueOf(updateRequest.get(Constants.UPDATED_ON)),
 //                        requestRating.getRating(), requestRating.getReview()));
                 ratingMessage.setUpdatedValues(processEventMessage(String.valueOf(updateRequest.get(Constants.UPDATED_ON)),
-                        overAllRating, requestRating.getReview()));
+                        overAllRating, requestRating.getReview(), requestRating.getAssessmentsQuality(),requestRating.getContentRelevance(),requestRating.getCourseEngagement(),requestRating.getInstructorQuality()));
             } else {
                 float overAllRating = calculateOverallRating(requestRating);
                 request.put(Constants.CREATED_ON, timeBasedUuid);
@@ -267,7 +267,7 @@ public class RatingServiceImpl implements RatingService {
 //                ratingMessage.setUpdatedValues(processEventMessage(String.valueOf(request.get(Constants.CREATED_ON)),
 //                        requestRating.getRating(), requestRating.getReview()));
                 ratingMessage.setUpdatedValues(processEventMessage(String.valueOf(request.get(Constants.CREATED_ON)),
-                        overAllRating, requestRating.getReview()));
+                        overAllRating, requestRating.getReview(), requestRating.getAssessmentsQuality(),requestRating.getContentRelevance(),requestRating.getCourseEngagement(),requestRating.getInstructorQuality()));
                 response.put(Constants.DATA, request);
 
             }
@@ -377,11 +377,15 @@ public class RatingServiceImpl implements RatingService {
 
     }
 
-    public RatingMessage.UpdatedValues processEventMessage(String date, Float rating, String review) {
+    public RatingMessage.UpdatedValues processEventMessage(String date, Float rating, String review, Float assementsQuality, Float contentRelevance,Float courseEngagement,Float instructorQuality) {
         RatingMessage.UpdatedValues values = new RatingMessage.UpdatedValues();
         values.setUpdatedOn(date);
         values.setRating(rating);
         values.setReview(review);
+        values.setAssessmentsQuality(assementsQuality);
+        values.setContentRelevance(contentRelevance);
+        values.setCourseEngagement(courseEngagement);
+        values.setInstructorQuality(instructorQuality);
         return values;
     }
 
