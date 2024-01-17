@@ -423,9 +423,12 @@ public class RatingServiceImpl implements RatingService {
 //                errObjList.add(ResponseMessage.Message.INVALID_INPUT + ResponseMessage.Message.INVALID_RATING);
 //            }
             if (validationBody.getRequestRating().getReview()!=null){
-                    if(!Pattern.matches("^[-A-Za-z0-9.!;_?@&\n\"\", ]++$", validationBody.getRequestRating().getReview())) {
-                errObjList.add(ResponseMessage.Message.INVALID_REVIEW);
-            }
+//                    if(!Pattern.matches("^[-A-Za-z0-9.!;_?@&\n\"\", ]++$", validationBody.getRequestRating().getReview())) {
+//                errObjList.add(ResponseMessage.Message.INVALID_REVIEW);
+//            }
+                if (!Pattern.matches("^[-A-Za-z0-9.!;_?@&\", ]*$", validationBody.getRequestRating().getReview())) {
+                    errObjList.add(ResponseMessage.Message.INVALID_REVIEW);
+                }
             }
             if (StringUtils.isEmpty(validationBody.getRequestRating().getUserId())) {
                 errObjList.add(ResponseMessage.Message.INVALID_USER);
