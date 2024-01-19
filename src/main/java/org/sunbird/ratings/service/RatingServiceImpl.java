@@ -758,10 +758,16 @@ public class RatingServiceImpl implements RatingService {
             numberOfRatings++;
         }
 
-        float overallRating = ((requestRating.getInstructorQuality() + requestRating.getContentRelevance() +
-                requestRating.getCourseEngagement() + requestRating.getAssessmentsQuality()) / numberOfRatings) * scale;
 
-        return overallRating;
+        float sumOfRatings = requestRating.getInstructorQuality() +
+                requestRating.getContentRelevance() +
+                requestRating.getCourseEngagement() +
+                requestRating.getAssessmentsQuality();
+
+        BigDecimal overallRatingBigDecimal = BigDecimal.valueOf(sumOfRatings)
+                .divide(BigDecimal.valueOf(numberOfRatings), 1, RoundingMode.HALF_UP)
+                .multiply(BigDecimal.valueOf(scale));
+
+        return overallRatingBigDecimal.floatValue();
     }
-
 }
