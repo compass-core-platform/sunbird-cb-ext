@@ -9,18 +9,26 @@ public class LookupDataModel {
     private String updatedOn;
     private String activityType;
     private String userId;
+    private Float instructorquality;
+    private Float contentrelevance;
+    private Float courseengagement;
+    private Float assessmentsquality;
 
     public LookupDataModel() {
 
     }
 
-    public LookupDataModel(String activityId, String review, Float rating, UUID updatedOn, String activityType, String userId) {
+    public LookupDataModel(String activityId, String review, Float rating, UUID updatedOn, String activityType, String userId, Float assementsQuality, Float contentRelevance,Float courseEngagement,Float instructorQuality) {
         this.activityId = activityId;
         this.review = review;
         this.rating = rating;
         this.updatedOn = updatedOn.toString();
         this.activityType = activityType;
         this.userId = userId;
+        this.assessmentsquality = assementsQuality;
+        this.contentrelevance = contentRelevance;
+        this.courseengagement = courseEngagement;
+        this.instructorquality = instructorQuality;
     }
 
     public String getActivityId() {
@@ -72,6 +80,38 @@ public class LookupDataModel {
         this.userId = userId;
     }
 
+    public Float getInstructorquality() {
+        return instructorquality;
+    }
+
+    public void setInstructorquality(Float instructorquality) {
+        this.instructorquality = instructorquality;
+    }
+
+    public Float getContentrelevance() {
+        return contentrelevance;
+    }
+
+    public void setContentrelevance(Float contentrelevance) {
+        this.contentrelevance = contentrelevance;
+    }
+
+    public Float getCourseengagement() {
+        return courseengagement;
+    }
+
+    public void setCourseengagement(Float courseengagement) {
+        this.courseengagement = courseengagement;
+    }
+
+    public Float getAssessmentsquality() {
+        return assessmentsquality;
+    }
+
+    public void setAssessmentsquality(Float assessmentsquality) {
+        this.assessmentsquality = assessmentsquality;
+    }
+
     @Override
     public String toString() {
         return "LookupDataModel{" +
@@ -81,6 +121,10 @@ public class LookupDataModel {
                 ", updatedOn='" + updatedOn + '\'' +
                 ", activityType='" + activityType + '\'' +
                 ", userId='" + userId + '\'' +
+                ", assessmentsQuality=" + assessmentsquality +
+                ", contentRelevance=" + contentrelevance +
+                ", courseEngagement=" + courseengagement +
+                ", assessmentsQuality=" + assessmentsquality +
                 '}';
     }
 }

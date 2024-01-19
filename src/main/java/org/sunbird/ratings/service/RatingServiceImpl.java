@@ -237,12 +237,16 @@ public class RatingServiceImpl implements RatingService {
                     Constants.TABLE_RATINGS, request, null);
 
             if (!CollectionUtils.isEmpty(existingDataList)) {
-
+                float overAllRating = calculateOverallRating(requestRating);
                 Map<String, Object> updateRequest = new HashMap<>();
                 if(requestRating.getComment()==null) {
-                    updateRequest.put(Constants.RATING, requestRating.getRating());
+                    updateRequest.put(Constants.RATING, overAllRating);
                     updateRequest.put(Constants.REVIEW, requestRating.getReview());
                     updateRequest.put(Constants.UPDATED_ON, timeBasedUuid);
+                    updateRequest.put(Constants.ASSESSMENTQUALITY, requestRating.getAssessmentsQuality());
+                    updateRequest.put(Constants.CONTENTRELEVANCE,requestRating.getContentRelevance());
+                    updateRequest.put(Constants.COURSEENGAGEMENT,requestRating.getCourseEngagement());
+                    updateRequest.put(Constants.INSTRUCTORQUALITY,requestRating.getInstructorQuality());
                 }
                 if(requestRating.getComment()!=null && requestRating.getCommentBy()!=null) {
                     updateRequest.put(Constants.COMMENT, requestRating.getComment());
@@ -259,22 +263,31 @@ public class RatingServiceImpl implements RatingService {
                         requestRating.getUserId(), String.valueOf((prevInfo.get(Constants.CREATED_ON))));
 
                 ratingMessage.setPrevValues(processEventMessage(String.valueOf(prevInfo.get(Constants.UPDATED_ON)),
-                        (Float) prevInfo.get(Constants.RATING), (String) prevInfo.get(Constants.REVIEW)));
+                        (Float) prevInfo.get(Constants.RATING), (String) prevInfo.get(Constants.REVIEW), (Float) prevInfo.get(Constants.ASSESSMENTQUALITY), (Float) prevInfo.get(Constants.CONTENTRELEVANCE), (Float) prevInfo.get(Constants.COURSEENGAGEMENT), (Float) prevInfo.get(Constants.INSTRUCTORQUALITY)));
+//                ratingMessage.setUpdatedValues(processEventMessage(String.valueOf(updateRequest.get(Constants.UPDATED_ON)),
+//                        requestRating.getRating(), requestRating.getReview()));
                 ratingMessage.setUpdatedValues(processEventMessage(String.valueOf(updateRequest.get(Constants.UPDATED_ON)),
-                        requestRating.getRating(), requestRating.getReview()));
+                        overAllRating, requestRating.getReview(), requestRating.getAssessmentsQuality(),requestRating.getContentRelevance(),requestRating.getCourseEngagement(),requestRating.getInstructorQuality()));
             } else {
+                float overAllRating = calculateOverallRating(requestRating);
                 request.put(Constants.CREATED_ON, timeBasedUuid);
-                request.put(Constants.RATING, requestRating.getRating());
+                request.put(Constants.RATING, overAllRating);
                 request.put(Constants.REVIEW, requestRating.getReview());
                 request.put(Constants.UPDATED_ON, timeBasedUuid);
                 request.put(Constants.RECOMMENDED,requestRating.getRecommended());
+                request.put(Constants.ASSESSMENTQUALITY,requestRating.getAssessmentsQuality());
+                request.put(Constants.CONTENTRELEVANCE,requestRating.getContentRelevance());
+                request.put(Constants.COURSEENGAGEMENT,requestRating.getCourseEngagement());
+                request.put(Constants.INSTRUCTORQUALITY,requestRating.getInstructorQuality());
                 cassandraOperation.insertRecord(Constants.KEYSPACE_SUNBIRD, Constants.TABLE_RATINGS, request);
 
                 ratingMessage = new RatingMessage("ratingAdd", requestRating.getActivityId(), requestRating.getActivityType(),
                         requestRating.getUserId(), String.valueOf(timeBasedUuid));
 
+//                ratingMessage.setUpdatedValues(processEventMessage(String.valueOf(request.get(Constants.CREATED_ON)),
+//                        requestRating.getRating(), requestRating.getReview()));
                 ratingMessage.setUpdatedValues(processEventMessage(String.valueOf(request.get(Constants.CREATED_ON)),
-                        requestRating.getRating(), requestRating.getReview()));
+                        overAllRating, requestRating.getReview(), requestRating.getAssessmentsQuality(),requestRating.getContentRelevance(),requestRating.getCourseEngagement(),requestRating.getInstructorQuality()));
                 response.put(Constants.DATA, request);
 
             }
@@ -355,7 +368,11 @@ public class RatingServiceImpl implements RatingService {
                             lookupModel.getUpdatedOn(),
                             lookupModel.getActivityType(),
                             lookupModel.getUserId(),
-                            (userModel.getFirstName() != null) ? userModel.getFirstName() : ""
+                            (userModel.getFirstName() != null) ? userModel.getFirstName() : "",
+                            lookupModel.getAssessmentsquality().toString(),
+                            lookupModel.getContentrelevance().toString(),
+                            lookupModel.getCourseengagement().toString(),
+                            lookupModel.getInstructorquality().toString()
                     ));
 
                 }
@@ -384,11 +401,15 @@ public class RatingServiceImpl implements RatingService {
 
     }
 
-    public RatingMessage.UpdatedValues processEventMessage(String date, Float rating, String review) {
+    public RatingMessage.UpdatedValues processEventMessage(String date, Float rating, String review, Float assementsQuality, Float contentRelevance,Float courseEngagement,Float instructorQuality) {
         RatingMessage.UpdatedValues values = new RatingMessage.UpdatedValues();
         values.setUpdatedOn(date);
         values.setRating(rating);
         values.setReview(review);
+        values.setAssessmentsQuality(assementsQuality);
+        values.setContentRelevance(contentRelevance);
+        values.setCourseEngagement(courseEngagement);
+        values.setInstructorQuality(instructorQuality);
         return values;
     }
 
@@ -403,15 +424,31 @@ public class RatingServiceImpl implements RatingService {
             if (StringUtils.isEmpty(validationBody.getRequestRating().getActivityType())) {
                 errObjList.add(ResponseMessage.Message.INVALID_INPUT);
             }
-            if (StringUtils.isEmpty((String.valueOf(validationBody.getRequestRating().getRating())))
-                    || validationBody.getRequestRating().getRating() < 1
-                    || validationBody.getRequestRating().getRating() > 5) {
-                errObjList.add(ResponseMessage.Message.INVALID_INPUT + ResponseMessage.Message.INVALID_RATING);
+
+            if (validationBody.getRequestRating().getInstructorQuality() == null || !isValidRating(validationBody.getRequestRating().getInstructorQuality())) {
+                errObjList.add(ResponseMessage.Message.INVALID_INPUT + ResponseMessage.Message.INVALID_RATING_INSTRUCTORQUALITY);
             }
+
+            if (validationBody.getRequestRating().getContentRelevance() == null || !isValidRating(validationBody.getRequestRating().getContentRelevance())) {
+                errObjList.add(ResponseMessage.Message.INVALID_INPUT + ResponseMessage.Message.INVALID_RATING_CONTENTRELEVANCE);
+            }
+
+            if (validationBody.getRequestRating().getCourseEngagement() == null || !isValidRating(validationBody.getRequestRating().getCourseEngagement())) {
+                errObjList.add(ResponseMessage.Message.INVALID_INPUT + ResponseMessage.Message.INVALID_RATING_COURSEENGAGEMENT);
+            }
+
+//            if (StringUtils.isEmpty((String.valueOf(validationBody.getRequestRating().getRating())))
+//                    || validationBody.getRequestRating().getRating() < 1
+//                    || validationBody.getRequestRating().getRating() > 5) {
+//                errObjList.add(ResponseMessage.Message.INVALID_INPUT + ResponseMessage.Message.INVALID_RATING);
+//            }
             if (validationBody.getRequestRating().getReview()!=null){
-                    if(!Pattern.matches("^[-A-Za-z0-9.!;_?@&\n\"\", ]++$", validationBody.getRequestRating().getReview())) {
-                errObjList.add(ResponseMessage.Message.INVALID_REVIEW);
-            }
+//                    if(!Pattern.matches("^[-A-Za-z0-9.!;_?@&\n\"\", ]++$", validationBody.getRequestRating().getReview())) {
+//                errObjList.add(ResponseMessage.Message.INVALID_REVIEW);
+//            }
+                if (!Pattern.matches("^[-A-Za-z0-9.!;_?@&\", ]*$", validationBody.getRequestRating().getReview())) {
+                    errObjList.add(ResponseMessage.Message.INVALID_REVIEW);
+                }
             }
             if (StringUtils.isEmpty(validationBody.getRequestRating().getUserId())) {
                 errObjList.add(ResponseMessage.Message.INVALID_USER);
@@ -704,4 +741,27 @@ public class RatingServiceImpl implements RatingService {
         }
         throw new BadRequestException("Please provide a valid Tag");
     }
+
+    private static boolean isValidRating(float rating) {
+        return rating >= 0 && rating <= 5;
+    }
+
+    private static float calculateOverallRating(RequestRating requestRating) {
+        float scale = 1.0f;
+        int numberOfRatings = 3;
+
+        if(requestRating.getAssessmentsQuality() == null) {
+            requestRating.setAssessmentsQuality(0.0f);
+        }
+
+        if (requestRating.getAssessmentsQuality() > 0) {
+            numberOfRatings++;
+        }
+
+        float overallRating = ((requestRating.getInstructorQuality() + requestRating.getContentRelevance() +
+                requestRating.getCourseEngagement() + requestRating.getAssessmentsQuality()) / numberOfRatings) * scale;
+
+        return overallRating;
+    }
+
 }
