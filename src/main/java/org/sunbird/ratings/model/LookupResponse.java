@@ -11,8 +11,12 @@ public class LookupResponse {
     private String activityType;
     private String userId;
     private String firstName;
+    private String instructorquality;
+    private String contentrelevance;
+    private String courseengagement;
+    private String assessmentsquality;
 
-    public LookupResponse(String activityId, String review, String rating, Long updatedon,String updatedOnUUID, String activityType, String userId, String firstName) {
+    public LookupResponse(String activityId, String review, String rating, Long updatedon,String updatedOnUUID, String activityType, String userId, String firstName, String assementsQuality, String contentRelevance, String courseEngagement, String instructorQuality) {
         this.activityId = activityId;
         this.review = review;
         this.rating = rating;
@@ -21,6 +25,10 @@ public class LookupResponse {
         this.activityType = activityType;
         this.userId = userId;
         this.firstName = firstName;
+        this.assessmentsquality = assementsQuality;
+        this.contentrelevance = contentRelevance;
+        this.courseengagement = courseEngagement;
+        this.instructorquality = instructorQuality;
     }
 
     public String getActivityId() {
@@ -85,5 +93,37 @@ public class LookupResponse {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public String getInstructorquality() {
+        return instructorquality;
+    }
+
+    public void setInstructorquality(String instructorquality) {
+        this.instructorquality = instructorquality;
+    }
+
+    public String getContentrelevance() {
+        return contentrelevance;
+    }
+
+    public void setContentrelevance(String contentrelevance) {
+        this.contentrelevance = contentrelevance;
+    }
+
+    public String getCourseengagement() {
+        return courseengagement;
+    }
+
+    public void setCourseengagement(String courseengagement) {
+        this.courseengagement = courseengagement;
+    }
+
+    public String getAssessmentsquality() {
+        return assessmentsquality;
+    }
+
+    public void setAssessmentsquality(String assessmentsquality) {
+        this.assessmentsquality = assessmentsquality;
     }
 }

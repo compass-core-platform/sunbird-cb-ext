@@ -11,6 +11,9 @@ public interface ResponseMessage {
         String SUCCESS_MESSAGE = "Success.";
         String INVALID_LIMIT   = "Limit must be greater than 1";
         String INVALID_USER    = "user is invalid.";
+        String INVALID_RATING_INSTRUCTORQUALITY = "Rating must be between 1 and 5 for instructorQuality";
+        String INVALID_RATING_CONTENTRELEVANCE = "Rating must be between 1 and 5 for contentRelevance";
+        String INVALID_RATING_COURSEENGAGEMENT = "Rating must be between 1 and 5 for courseEngagement";
 
     }
 

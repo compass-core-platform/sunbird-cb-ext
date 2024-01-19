@@ -195,6 +195,10 @@ public class Constants {
 	public static final String RATING_LOOKUP_RATING_OPERATION = "lookup";
 	public static final String RATING_GET_OPERATION = "getRating";
 	public static final String RATING_SUMMARY_OPERATION = "getSummary";
+	public static final String ASSESSMENTQUALITY = "assessmentsquality";
+	public static final String CONTENTRELEVANCE = "contentrelevance";
+	public static final String COURSEENGAGEMENT = "courseengagement";
+	public static final String INSTRUCTORQUALITY = "instructorquality";
 	// assessment
 	public static final String QUESTION_SET = "questionSet";
 	public static final String ASSESSMENT_QNS_ANS_SET = "assessmentQnsAnsSet_";
