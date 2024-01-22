@@ -13,6 +13,10 @@ public class RatingModelInfo {
     private String activityType;
     private String userId;
     private Timestamp createdOn;
+    private Float instructorquality;
+    private Float contentrelevance;
+    private Float courseengagement;
+    private Float assessmentsquality;
 
     private String recommended;
 
@@ -119,5 +123,37 @@ public class RatingModelInfo {
 
     public void setCreatedOn(Timestamp createdOn) {
         this.createdOn = createdOn;
+    }
+
+    public Float getInstructorquality() {
+        return instructorquality;
+    }
+
+    public void setInstructorquality(Float instructorquality) {
+        this.instructorquality = instructorquality;
+    }
+
+    public Float getContentrelevance() {
+        return contentrelevance;
+    }
+
+    public void setContentrelevance(Float contentrelevance) {
+        this.contentrelevance = contentrelevance;
+    }
+
+    public Float getCourseengagement() {
+        return courseengagement;
+    }
+
+    public void setCourseengagement(Float courseengagement) {
+        this.courseengagement = courseengagement;
+    }
+
+    public Float getAssessmentsquality() {
+        return assessmentsquality;
+    }
+
+    public void setAssessmentsquality(Float assessmentsquality) {
+        this.assessmentsquality = assessmentsquality;
     }
 }
