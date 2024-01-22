@@ -261,6 +261,7 @@ public class RatingServiceImpl implements RatingService {
                     updateRequest.put(Constants.RECOMMENDED, requestRating.getRecommended());
                 }
                 Map<String, Object> prevInfo = existingDataList.get(0);
+                logger.info("ratings updateRequest "+updateRequest);
                 cassandraOperation.updateRecord(Constants.KEYSPACE_SUNBIRD, Constants.TABLE_RATINGS, updateRequest,
                         request);
                 ratingMessage = new RatingMessage("ratingUpdate", requestRating.getActivityId(), requestRating.getActivityType(),
