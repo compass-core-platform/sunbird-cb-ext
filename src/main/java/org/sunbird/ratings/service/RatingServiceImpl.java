@@ -344,7 +344,7 @@ public class RatingServiceImpl implements RatingService {
             Map<String, Object> existingDataList = cassandraOperation.getRecordsByPropertiesWithPagination(Constants.KEYSPACE_SUNBIRD,
                     Constants.TABLE_RATINGS_LOOKUP, request, null, lookupRequest.getLimit(), uuid, Constants.USER_ID);
             List<LookupResponse> listOfLookupResponse = new ArrayList<>();
-
+            logger.info("printing existingDataList for LookUp"+existingDataList);
             if (!CollectionUtils.isEmpty(existingDataList)) {
 
                 for (Map.Entry<String, Object> existingData : existingDataList.entrySet()) {
@@ -359,11 +359,12 @@ public class RatingServiceImpl implements RatingService {
 
                 Map<String, Object> existingUserList = cassandraOperation.getRecordsByPropertiesByKey(Constants.KEYSPACE_SUNBIRD,
                         Constants.TABLE_USER, userRequest, fields, Constants.ID);
-
+                logger.info("printing existingUserList for LookUp"+existingUserList);
                 for (String user : listOfUserId) {
                     final ObjectMapper mapper = new ObjectMapper();
                     final UserModel userModel = mapper.convertValue(existingUserList.get(user), UserModel.class);
                     final LookupDataModel lookupModel = mapper.convertValue(existingDataList.get(user), LookupDataModel.class);
+                    logger.info("printing lookupModel for LookUp"+lookupModel);
                     Long updatedTime= ((UUID.fromString(lookupModel.getUpdatedOn()).timestamp() - 0x01b21dd213814000L) )/ 10000L;
                     listOfLookupResponse.add(new LookupResponse(lookupModel.getActivityId(),
                             lookupModel.getReview(),
