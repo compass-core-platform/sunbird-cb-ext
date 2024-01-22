@@ -239,7 +239,7 @@ public class RatingServiceImpl implements RatingService {
             List<Map<String, Object>> existingDataList = cassandraOperation.getRecordsByPropertiesWithoutFiltering(
                     Constants.KEYSPACE_SUNBIRD,
                     Constants.TABLE_RATINGS, request, null);
-
+            logger.info("ratings existingDataList "+existingDataList);
             if (!CollectionUtils.isEmpty(existingDataList)) {
                 float overAllRating = calculateOverallRating(requestRating);
                 Map<String, Object> updateRequest = new HashMap<>();
