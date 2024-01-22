@@ -101,6 +101,10 @@ public class RatingServiceImpl implements RatingService {
                 ratingModelInfo.setComment(ratingData.get(Constants.COMMENT)!=null ?(String) ratingData.get(Constants.COMMENT) : null);
                 ratingModelInfo.setCommentBy(ratingData.get(Constants.COMMENT_BY)!=null ?(String) ratingData.get(Constants.COMMENT_BY) : null);
                 ratingModelInfo.setRecommended(ratingData.get(Constants.RECOMMENDED)!=null ?(String)ratingData.get(Constants.RECOMMENDED): null);
+                ratingModelInfo.setAssessmentsquality(ratingData.get(Constants.ASSESSMENTQUALITY)!=null ? (Float) ratingData.get(Constants.ASSESSMENTQUALITY):0.0f);
+                ratingModelInfo.setContentrelevance(ratingData.get(Constants.CONTENTRELEVANCE)!=null ? (Float) ratingData.get(Constants.CONTENTRELEVANCE):0.0f);
+                ratingModelInfo.setCourseengagement(ratingData.get(Constants.COURSEENGAGEMENT)!=null ? (Float) ratingData.get(Constants.COURSEENGAGEMENT):0.0f);
+                ratingModelInfo.setInstructorquality(ratingData.get(Constants.INSTRUCTORQUALITY)!=null ? (Float) ratingData.get(Constants.INSTRUCTORQUALITY):0.0f);
                 if(ratingData.get(Constants.COMMENT_UPDATED_ON)!=null){
                     UUID commentupdatedOn = (UUID) ratingData.get(Constants.COMMENT_UPDATED_ON);
                     Long CommentUpdatedTime = (commentupdatedOn.timestamp() - 0x01b21dd213814000L) / 10000L;
