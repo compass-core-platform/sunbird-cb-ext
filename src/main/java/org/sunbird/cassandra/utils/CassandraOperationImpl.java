@@ -148,6 +148,7 @@ public class CassandraOperationImpl implements CassandraOperation {
 			if (!StringUtils.isEmpty(updatedOn)) {
 				selectQuery.where(QueryBuilder.lt("updatedon", UUID.fromString(updatedOn)));
 			}
+			logger.info("printing getRecordsByPropertiesWithPagination query" +selectQuery);
 			ResultSet results = connectionManager.getSession(keyspaceName).execute(selectQuery);
 			response = CassandraUtil.createResponse(results, key);
 		} catch (Exception e) {
