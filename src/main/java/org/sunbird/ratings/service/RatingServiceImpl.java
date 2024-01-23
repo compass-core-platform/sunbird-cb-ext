@@ -285,7 +285,9 @@ public class RatingServiceImpl implements RatingService {
                 request.put(Constants.CONTENTRELEVANCE,requestRating.getContentRelevance());
                 request.put(Constants.COURSEENGAGEMENT,requestRating.getCourseEngagement());
                 request.put(Constants.INSTRUCTORQUALITY,requestRating.getInstructorQuality());
-                cassandraOperation.insertRecord(Constants.KEYSPACE_SUNBIRD, Constants.TABLE_RATINGS, request);
+                logger.info("request "+request);
+                SBApiResponse sbApiResponse = cassandraOperation.insertRecord(Constants.KEYSPACE_SUNBIRD, Constants.TABLE_RATINGS, request);
+                logger.info("SBApiResponse "+sbApiResponse);
 
                 ratingMessage = new RatingMessage("ratingAdd", requestRating.getActivityId(), requestRating.getActivityType(),
                         requestRating.getUserId(), String.valueOf(timeBasedUuid));
