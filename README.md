@@ -361,3 +361,40 @@ CREATE TABLE sunbird.user_bulk_upload (
     PRIMARY KEY (rootorgid, identifier)
 ) WITH CLUSTERING ORDER BY (identifier ASC);
 ```
+ALTER TABLE sunbird.ratings_lookup
+ADD instructorquality float;
+ 
+ALTER TABLE sunbird.ratings_lookup
+ADD contentrelevance float;
+ 
+ALTER TABLE sunbird.ratings_lookup
+ADD courseengagement float;
+ 
+ALTER TABLE sunbird.ratings_lookup
+ADD assessmentsquality float;    
+
+
+ALTER TABLE sunbird.ratings_summary
+ADD instructorquality float;
+ 
+ALTER TABLE sunbird.ratings_summary
+ADD contentrelevance float;
+ 
+ALTER TABLE sunbird.ratings_summary
+ADD courseengagement float;
+ 
+ALTER TABLE sunbird.ratings_summary
+ADD assessmentsquality float;   
+
+
+ALTER TABLE sunbird.ratings
+ADD instructorquality float;
+ 
+ALTER TABLE sunbird.ratings
+ADD contentrelevance float;
+ 
+ALTER TABLE sunbird.ratings
+ADD courseengagement float;
+ 
+ALTER TABLE sunbird.ratings
+ADD assessmentsquality float;  
